@@ -24,15 +24,19 @@ const roboto = Roboto({
 
 interface LayoutProps {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, modal }: LayoutProps) => {
   return (
     <html lang="en">
       <body className={roboto.variable}>
         <TanStackProvider>
           <Header />
-          <main>{children}</main>
+          <main>
+            {children}
+            {modal}
+          </main>
           <Footer />
         </TanStackProvider>
       </body>
