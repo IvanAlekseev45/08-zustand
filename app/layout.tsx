@@ -6,10 +6,10 @@ import { Roboto } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "NoteHub",
-  description: "Your favorite note-taking site)",
+  description: "Your favorite note-taking site",
   openGraph: {
-    title: "NoteHab",
-    description: "Your favorite note-taking site)",
+    title: "NoteHub",
+    description: "Your favorite note-taking site",
     url: "https://notehub.vercel.app",
     images: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
   },
@@ -24,19 +24,15 @@ const roboto = Roboto({
 
 interface LayoutProps {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }
 
-const Layout = ({ children, modal }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <html lang="en">
-      <body className={`${roboto.variable}`}>
+      <body className={roboto.variable}>
         <TanStackProvider>
           <Header />
-          <main>
-            {children}
-            {modal}
-          </main>
+          <main>{children}</main>
           <Footer />
         </TanStackProvider>
       </body>
