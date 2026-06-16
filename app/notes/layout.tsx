@@ -1,15 +1,9 @@
 interface LayoutProps {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }
 
-const Layout = ({ children, modal }: LayoutProps) => {
-  return (
-    <>
-      {children}
-      {modal}
-    </>
-  );
+const Layout = ({ children }: LayoutProps) => {
+  return <>{children}</>;
 };
 
 export default Layout;
