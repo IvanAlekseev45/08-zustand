@@ -1,4 +1,16 @@
 import css from "./not-found.module.css";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "404 - Page Not Found",
+  description: "The page you requested was not found.",
+  openGraph: {
+    title: "404 - Page Not Found",
+    description: "The page you requested was not found.",
+    url: "https://notehub.vercel.app",
+    images: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
+  },
+};
 
 const NotFound = () => {
   return (

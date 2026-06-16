@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
@@ -8,8 +9,6 @@ import fetchNotes from "../../../../lib/api";
 import SearchBox from "../../../../components/SearchBox/SearchBox";
 import Pagination from "../../../../components/Pagination/Pagination";
 import NoteList from "../../../../components/NoteList/NoteList";
-import Modal from "../../../../components/Modal/Modal";
-import NoteForm from "../../../../components/NoteForm/NoteForm";
 
 import css from "../../NotesPage.module.css";
 
@@ -21,7 +20,6 @@ const NotesClient = ({ tag }: NotesClientProps) => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const debouncedSetQuery = useDebouncedCallback((value: string) => {
     setQuery(value);
@@ -31,14 +29,6 @@ const NotesClient = ({ tag }: NotesClientProps) => {
   const handleSearchChange = (value: string) => {
     setInputValue(value);
     debouncedSetQuery(value);
-  };
-
-  const openModal = () => {
-    setIsOpenModal(true);
-  };
-
-  const closeModal = () => {
-    setIsOpenModal(false);
   };
 
   const { data } = useQuery({
@@ -60,18 +50,12 @@ const NotesClient = ({ tag }: NotesClientProps) => {
           <Pagination currentPage={page} pageCount={totalPages} onPageChange={setPage} />
         )}
 
-        <button className={css.button} onClick={openModal}>
+        <Link href="/notes/action/create" className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
 
       {notes.length > 0 && <NoteList notes={notes} />}
-
-      {isOpenModal && (
-        <Modal onClose={closeModal}>
-          <NoteForm onClose={closeModal} />
-        </Modal>
-      )}
     </div>
   );
 };

@@ -1,12 +1,29 @@
 import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
-
+import { Metadata } from "next";
 import fetchNotes from "../../../../lib/api";
 import NotesClient from "./Notes.client";
+
 interface PageProps {
   params: Promise<{
     slug: string[];
   }>;
 }
+
+export const generateMetadata = async ({ params }: PageProps) => {
+  const { slug } = await params;
+
+  const metadata: Metadata = {
+    title: slug[0],
+    description: `The information about ${slug[0]} `,
+    openGraph: {
+      title: `${slug[0]} Notes`,
+      description: `Browse notes filtered by ${slug[0]}.`,
+      url: `https://notehub.vercel.app/notes/filter/${slug[0]}`,
+      images: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
+    },
+  };
+  return metadata;
+};
 
 const Page = async ({ params }: PageProps) => {
   const { slug } = await params;
