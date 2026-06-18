@@ -35,7 +35,6 @@ const NotesClient = ({ tag }: NotesClientProps) => {
     queryKey: ["notes", query, page, tag],
     queryFn: () => fetchNotes(query, page, tag),
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
   });
 
   const notes = data?.notes ?? [];
