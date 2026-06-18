@@ -9,7 +9,7 @@ interface PageProps {
   }>;
 }
 
-export const generateMetadata = async ({ params }: PageProps) => {
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { slug } = await params;
 
   const metadata: Metadata = {
@@ -19,7 +19,11 @@ export const generateMetadata = async ({ params }: PageProps) => {
       title: `${slug[0]} Notes`,
       description: `Browse notes filtered by ${slug[0]}.`,
       url: `https://notehub.vercel.app/notes/filter/${slug[0]}`,
-      images: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        },
+      ],
     },
   };
   return metadata;

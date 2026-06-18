@@ -9,7 +9,7 @@ interface PageProps {
   }>;
 }
 
-export const generateMetadata = async ({ params }: PageProps) => {
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { id } = await params;
 
   const note = await fetchNoteById(id);
@@ -21,7 +21,11 @@ export const generateMetadata = async ({ params }: PageProps) => {
       title: note.title,
       description: note.content,
       url: `https://notehub.vercel.app/notes/${id}`,
-      images: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        },
+      ],
     },
   };
   return metadata;
